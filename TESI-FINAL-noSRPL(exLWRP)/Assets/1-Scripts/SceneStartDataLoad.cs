@@ -31,4 +31,4 @@ namespace Gavi.VR
             gameObject.transform.localScale = Vector3.one * Scale;
         }
     }
-}g
+}

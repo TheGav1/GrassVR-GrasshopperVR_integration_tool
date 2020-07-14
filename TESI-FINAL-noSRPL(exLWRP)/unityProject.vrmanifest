@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.tesifinalnosrplexlwrp.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "C:\\Users\\giaco\\Documents\\Unity Project\\TESI-FINAL-noSRPL(exLWRP)\\Assets\\StreamingAssets\\SteamVR\\actions.json",
+      "action_manifest_path": "C:\\Users\\giaco\\Documents\\GitHub\\GaviVR-RhinoVR_integration-FF-SA\\TESI-FINAL-noSRPL(exLWRP)\\Assets\\StreamingAssets\\SteamVR\\actions.json",
       "strings": {
         "en_us": {
           "name": "TESI-FINAL-noSRPL(exLWRP) [Testing]"
