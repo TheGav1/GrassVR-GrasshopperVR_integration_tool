@@ -15,4 +15,3 @@ The repository is divided between:
 
 For the Unity project all the required data is present: the StamVR asset is kept in the project at newer version of the asset could break sone of the developed interaction and input binding elements.\
 The main folder containing the developped data is the [Asset folder](GRASSVR_UnityProject/Assets/)
-)\
