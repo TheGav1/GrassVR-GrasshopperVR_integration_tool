@@ -15,16 +15,17 @@ public class VRInputModule : BaseInputModule
 
     public override void Process()
     {
-        eventSystem.RaycastAll(Data, m_RaycastResultCache);
-        Data.pointerCurrentRaycast = FindFirstRaycast(m_RaycastResultCache);
+            eventSystem.RaycastAll(Data, m_RaycastResultCache);
+            Data.pointerCurrentRaycast = FindFirstRaycast(m_RaycastResultCache);
 
-        HandlePointerExitAndEnter(Data, Data.pointerCurrentRaycast.gameObject);
+            HandlePointerExitAndEnter(Data, Data.pointerCurrentRaycast.gameObject);
 
-        ExecuteEvents.Execute(Data.pointerDrag, Data, ExecuteEvents.dragHandler);
+            ExecuteEvents.Execute(Data.pointerDrag, Data, ExecuteEvents.dragHandler);
     }
 
     public void Press()
     {
+
         Data.pointerPressRaycast = Data.pointerCurrentRaycast;
 
         //set pointer variable Pres gameobj + drag gameobj

@@ -2,11 +2,13 @@
   "actions": [
     {
       "name": "/actions/default/in/InteractUI",
-      "type": "boolean"
+      "type": "boolean",
+      "requirement": "mandatory"
     },
     {
       "name": "/actions/default/in/Teleport",
-      "type": "boolean"
+      "type": "boolean",
+      "requirement": "mandatory"
     },
     {
       "name": "/actions/default/in/GrabPinch",
@@ -50,11 +52,12 @@
       "type": "boolean"
     },
     {
-      "name": "/actions/default/in/LAserPointer",
-      "type": "boolean"
+      "name": "/actions/default/in/Menu",
+      "type": "boolean",
+      "requirement": "mandatory"
     },
     {
-      "name": "/actions/default/in/Menu",
+      "name": "/actions/default/in/PointerTog",
       "type": "boolean",
       "requirement": "mandatory"
     },

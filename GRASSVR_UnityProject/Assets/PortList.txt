@@ -1,7 +1,8 @@
 Port 				Function
 (unity)[send recive invers for grass]
 
-5000				Main Mesh Recive
+5000				Main Mesh Recive (deformed)
+10000				Base Mesh Recive (not-deformed)
 
 6000				Force Send
 6001				Force Recive

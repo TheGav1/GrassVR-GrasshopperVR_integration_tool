@@ -105,19 +105,19 @@ namespace Valve.VR
             }
         }
         
-        public virtual SteamVR_Action_Boolean LAserPointer
-        {
-            get
-            {
-                return SteamVR_Actions.default_LAserPointer;
-            }
-        }
-        
         public virtual SteamVR_Action_Boolean Menu
         {
             get
             {
                 return SteamVR_Actions.default_Menu;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean PointerTog
+        {
+            get
+            {
+                return SteamVR_Actions.default_PointerTog;
             }
         }
         
