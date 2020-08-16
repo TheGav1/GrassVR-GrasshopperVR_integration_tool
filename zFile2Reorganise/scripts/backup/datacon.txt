@@ -1,0 +1,303 @@
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Numerics;
+
+using System.Net;
+using System.Net.Sockets;
+
+using System.Threading;
+using System.Linq;//ToList usage
+
+
+namespace UDPTesting
+{
+
+    class UDPHandler
+    {
+
+        private int receivePort, sendPort;
+        private string serverIP;
+        private IPEndPoint sendEndPoint, receiveEndPoint;
+        private int counterwhile=1;//while counter !=0 continue
+
+        List<string> data; //conversion string2vector3 data save
+
+        //list data
+        List<Vector3> verticies = new List<Vector3>();
+        List<int> triangles = new List<int>();
+
+        public UDPHandler(string serverIP, int receivePort, int sendPort)
+        {
+            this.serverIP = serverIP;
+            this.receivePort = receivePort;
+            this.sendPort = sendPort;
+            this.sendEndPoint = new IPEndPoint(IPAddress.Parse(this.serverIP), this.sendPort);
+            this.receiveEndPoint = new IPEndPoint(IPAddress.Parse(this.serverIP), this.receivePort);
+            this.readerUdpClient();
+            this.senderUdpClient();
+        }
+
+        void readerUdpClient()
+        {
+            UdpClient readerClient = new UdpClient();
+            IPEndPoint localEndpoint = new IPEndPoint(IPAddress.Parse(this.serverIP), this.receivePort);
+            readerClient.Client.Bind(localEndpoint);          //Tried both Connect and Bind
+            //readerClient.Connect(this.receiveEndPoint);
+            Thread t = new Thread(() => {
+            while (counterwhile != 0)
+            {
+                string text = "";
+                Console.WriteLine("Awaiting data from server\n" + serverIP + " port:" + receivePort + "\n...");
+                byte[] bytesReceived = readerClient.Receive(ref localEndpoint);
+                // decode UTF8-coded bytes to text format
+                text = Encoding.UTF8.GetString(bytesReceived);
+
+                //The above throws:     System.InvalidOperationException: 'You must call the Bind method before performing this operation'
+                Console.WriteLine("Received data from\n" + text);
+
+                //convert data
+                //1 split \n
+                data = text.Split('\n').ToList();
+                //find if Triangles
+                if (data[0].StartsWith("T"))
+                    {
+                        for( int i = 0; i < data.Count; i++)
+                        {
+                            //remuve T
+                            data[i] = data[i].Substring(1);
+                            //remuve Parentesis
+                            if (data[i].StartsWith("{"))
+                            {
+                                data[i] = data[i].Substring(1);
+                            }
+                            if (data[i].EndsWith("}"))
+                            {
+                                data[i] = data[i].Substring(data[i].Length - 2);
+                            }
+                            //T3 string to list<int>
+                            for( int c = 0; i < 3; i++)
+                            {
+
+                            }
+                        }
+
+                    }
+
+                    //other1 data not T
+
+                    //other2 Parentesis
+
+                    //other2 string to list<Vec3>
+
+                    //x,y,z correction
+
+
+
+                    Console.WriteLine("Received data from\n" + text);
+                    counterwhile = Convert.ToInt32(Console.ReadLine());
+
+                    //data set Vertex=0
+                    data = text.Split('\n').ToList();
+                    for (int i = 0; i < data.Count; i++)
+                    {
+                        // Remove the parentheses
+                        if (data[i].StartsWith("{"))
+                        {
+                            data[i] = data[i].Substring(1);
+                        }
+                        if (data[i].EndsWith("}"))
+                        {
+                            data[i] = data[i].Substring(data[i].Length - 2);
+                        }
+                        // split the items
+                        string[] sArray = data[i].Split(',');
+
+                        // store as a Vector3
+                        verticies[i] = new Vector3
+                        (
+                            float.Parse(sArray[0]),
+                            float.Parse(sArray[1]),
+                            float.Parse(sArray[2])
+                         );
+
+                    }
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Numerics;
+
+using System.Net;
+using System.Net.Sockets;
+
+using System.Threading;
+using System.Linq;//ToList usage
+
+//remuve characters https://stackoverflow.com/questions/7411438/remove-characters-from-c-sharp-string
+
+
+namespace UDPTesting
+{
+
+    class UDPHandler
+    {
+
+        private int receivePort, sendPort;
+        private string serverIP;
+        private IPEndPoint sendEndPoint, receiveEndPoint;
+        private int counterwhile = 1;//while counter !=0 continue
+
+        List<string> data; //conversion string2vector3 data save
+        string[] datatriang = new string[3];//split triangle datas
+
+        //list data
+        List<Vector3> verticies = new List<Vector3>();
+        List<int> triangles = new List<int>();
+
+        //character remuver
+        string[] ToRemuve = new string[] { "T", "{", "}", "\n"};
+
+        public UDPHandler(string serverIP, int receivePort, int sendPort)
+        {
+            this.serverIP = serverIP;
+            this.receivePort = receivePort;
+            this.sendPort = sendPort;
+            this.sendEndPoint = new IPEndPoint(IPAddress.Parse(this.serverIP), this.sendPort);
+            this.receiveEndPoint = new IPEndPoint(IPAddress.Parse(this.serverIP), this.receivePort);
+            this.readerUdpClient();
+            this.senderUdpClient();
+        }
+
+        void readerUdpClient()
+        {
+            UdpClient readerClient = new UdpClient();
+            IPEndPoint localEndpoint = new IPEndPoint(IPAddress.Parse(this.serverIP), this.receivePort);
+            readerClient.Client.Bind(localEndpoint);          //Tried both Connect and Bind
+            //readerClient.Connect(this.receiveEndPoint);
+            Thread t = new Thread(() => {
+                while (counterwhile != 0)
+                {
+                    string text = "";
+                    Console.WriteLine("Awaiting data from server\n" + serverIP + " port:" + receivePort + "\n...");
+                    byte[] bytesReceived = readerClient.Receive(ref localEndpoint);
+                    // decode UTF8-coded bytes to text format
+                    text = Encoding.UTF8.GetString(bytesReceived);
+
+                    //The above throws:     System.InvalidOperationException: 'You must call the Bind method before performing this operation'
+                    Console.WriteLine("Received data from\n" + text);
+
+                    //convert data
+                    //1 split \n
+                    data = text.Split('\n').ToList();
+                    //find if Triangles
+                    if (data[0].StartsWith("T"))
+                    {
+                       
+                        for (int i = 0; i < data.Count; i++)
+                        {
+                            foreach (var c in ToRemuve)
+                            {
+                                data[i] = data[i].Replace(c, string.Empty);
+                        }
+                            /*//remuve T { }
+                            data[i] = data[i].Substring(1);
+                            
+                            //remuve Parentesis
+                            if (data[i].StartsWith("{"))
+                            {
+                                data[i] = data[i].Substring(1);
+                                data[i] = data[i].Remove(data[i].Length - 2);
+                            }
+                            if (data[i].EndsWith("}\n"))
+                            {
+                                data[i] = data[i].Remove(data[i].Length - 2);
+                            }
+                            */
+                            Console.WriteLine("Converted data check: " + i + "\n" + data[i]);
+                            //T3 string to list<int>
+                            datatriang = data[i].Split(';');
+                            for (int c = 0; c < 3; c++)
+                            {
+                                triangles.Add(Int32.Parse(datatriang[c]));
+                            }
+                        }
+                    }//trinagles end
+
+                    //other1 data not T
+                    else
+                    {
+                        for (int i = 0; i < data.Count; i++)
+                        {
+                            foreach (var c in ToRemuve)
+                            {
+                                data[i] = data[i].Replace(c, string.Empty);
+                                //remuve Parentesis
+                                if (data[i].StartsWith("{"))
+                            {
+                                data[i] = data[i].Substring(1);
+                                data[i] = data[i].Remove(data[i].Length - 1);
+                            }
+                            if (data[i].EndsWith("}"))
+                            {
+                                data[i] = data[i].Remove(data[i].Length - 1);
+                            }
+                            Console.WriteLine("Converted data check: " + i + "\n" + data[i]);
+                            
+                            //other2 string to list<Vec3>
+                            // split the items
+                            string[] sArray = data[i].Split(',');
+
+                            // store as a Vector3
+                            verticies.Add(new Vector3(
+                                float.Parse(sArray[0]),
+                                float.Parse(sArray[1]),
+                                float.Parse(sArray[2])
+                             ));
+                            //ToDo x,y,z correction
+                        }
+                    }//other end
+
+                    data.Clear();
+
+                    Console.WriteLine("Vertex data:\n");
+                    verticies.ForEach(i => Console.WriteLine(i.ToString()));
+                    Console.WriteLine("\n\n");
+
+                    Console.WriteLine("Triangles data:\n");
+                    verticies.ForEach(i => Console.WriteLine(i));
+                    Console.WriteLine("\n\n");
+                    counterwhile = Convert.ToInt32(Console.ReadLine());
+                }//while end
+                
+            });//tread definition end
+            t.Start();
+        }
+
+        void senderUdpClient()
+        {
+            UdpClient senderClient = new UdpClient();
+            senderClient.Connect(this.sendEndPoint);
+            string sendString = "1;2;3";
+            byte[] bytes = toBytes(sendString);
+            Thread t = new Thread(() => {
+                while (true)
+                {
+                    senderClient.Send(bytes, bytes.Length);
+                    Thread.Sleep(1000);
+                }
+            });
+            t.Start();
+        }
+
+        public byte[] toBytes(string text)
+        {
+            return Encoding.UTF8.GetBytes(text);
+        }
+
+        public string fromBytes(byte[] bytes)
+        {
+            return Encoding.UTF8.GetString(bytes);
+        }
+
+    }
+}
