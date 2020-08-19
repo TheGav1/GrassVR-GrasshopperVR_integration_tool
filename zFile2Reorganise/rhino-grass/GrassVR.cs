@@ -5,13 +5,18 @@ using System.Collections.Generic;
 using Rhino;
 using Rhino.Geometry;
 
+// <Custom usign>
 using Grasshopper;
 using Grasshopper.Kernel;
 using Grasshopper.Kernel.Data;
 using Grasshopper.Kernel.Types;
 using System.Linq;
 
-
+//base GrassVR handler old version for 1 reciver for each data type
+//next version present a swith on the data type to generate a single reciver
+//This is the initial listener with external gHowl attached component.
+//New version has a internal UDP reciver in parallel thread
+// </Custom usign>
 
 /// <summary>
 /// This class will be instantiated on demand by the Script component.
