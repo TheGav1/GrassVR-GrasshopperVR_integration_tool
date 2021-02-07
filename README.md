@@ -1,5 +1,10 @@
 # GrassVR - Grasshopper VR integration tool
 
+## UPDATE
+Afther the release of Rhino7 the project will be reexecuted to include some of the mods that have been proposed as continuation of the thesis work.
+In the nexts weeks I will start reorganizing the project and initillize a new branch for the Rhino7 version.
+As for the last few month I did not had access to the VR headset I will rester work on it as soon as I will have the equipment for gameplay testing. 
+
 ## Grass VR interaction for Form Finding and Structural Analysis proof of concept.
 
 The files in the repository are the summary of the development work executed for my thesis work "Exploring the Potential of Cross Reality in Architectural, Civil Engineering and Construction - From general sector usage to the educational potential of a Virtual Reality design tool" at ULB and VUB universities.
